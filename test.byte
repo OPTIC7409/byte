@@ -1,0 +1,3 @@
+def name = "hello";
+
+print(name)
