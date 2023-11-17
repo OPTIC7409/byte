@@ -1,0 +1,6 @@
+Visual studio code theme - check tutorials online
+Package Manager - for libs to be installed
+Pointer and memory handling - watch tutorial series to see how everything works
+Write Documentation
+Rewrite README.md
+Rewrite for better efficiency and optimisation.
