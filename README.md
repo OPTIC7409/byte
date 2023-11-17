@@ -1,28 +1,110 @@
-# Byte Programming Language
+$# Byte Programming Language
 
-<p align="center">
-  <img src="byte-logo.png" alt="Byte Logo">
-</p>
+$**Introduction**
 
-Byte is a lightweight and powerful programming language crafted for efficient memory editing. Built on a solid TypeScript foundation, Byte offers a seamless development experience with its robust lexer, AST (Abstract Syntax Tree), parser, and interpreter.
+Byte is a minimalist esoteric programming language designed to be concise and challenging. This guide will help you get started with Byte, including basic syntax, data types, control flow, and some special features.
 
-## Features
+$**Running Byte Programs**
 
-- **Efficient Memory Editing**: Byte is tailored for streamlined memory manipulation tasks.
-- **TypeScript Core**: Leveraging TypeScript ensures a reliable and maintainable codebase.
-- **Clear and Powerful Syntax**: Byte's syntax is designed for clarity and speed.
+To run a Byte program, use the following command:
+```bash
+npm run byte <FILENAME>
+$Hello, World!
 
-## Getting Started
+Let's start with a simple "Hello, World!" program in Byte:
 
-To start using Byte, follow the [installation guide](docs/installation.md) in the documentation.
+byte
+Copy code
+print("Hello, World!")
+$Variables
 
-## Documentation
+Byte supports variables with the var keyword:
 
-Explore the full capabilities of Byte in our [documentation](docs/).
+byte
+Copy code
+var x = 42;
+print(x);
+$Data Types
 
-## Quick Example
+Numbers: Byte supports numeric values.
 
-```byte
-// Simple Byte program to demonstrate memory editing
-let address = 0x00123A;
-Memory.write(address, 42);
+byte
+Copy code
+var num = 3.14;
+Strings: Represented with double quotes.
+
+byte
+Copy code
+var message = "Hello, Byte!";
+Booleans: true or false.
+
+byte
+Copy code
+var isTrue = true;
+$Control Flow
+
+$If Statement
+
+byte
+Copy code
+if (condition) {
+    // code to execute if condition is true
+} else {
+    // code to execute if condition is false
+}
+$While Loop
+
+byte
+Copy code
+var i = 0;
+while (i < 5) {
+    print(i);
+    i = i + 1;
+}
+$For Loop
+
+byte
+Copy code
+for (var i = 0; i < 5; i = i + 1) {
+    print(i);
+}
+$Functions
+
+Define functions using the function keyword:
+
+byte
+Copy code
+function add(a, b) {
+    return a + b;
+}
+
+var result = add(3, 4);
+print(result);
+$Comments
+
+Byte supports single-line comments with //:
+
+byte
+Copy code
+// This is a comment
+$Error Handling
+
+Byte includes basic error handling with try and catch:
+
+byte
+Copy code
+try {
+    // code that might throw an error
+} catch (error) {
+    // handle the error
+    print("Error occurred:", error);
+}
+$Advanced Features
+
+Bytecode Manipulation: Byte allows direct manipulation of its bytecode for advanced users.
+Metaprogramming: Modify the program's structure during runtime.
+$Credits
+
+Byte is inspired by esolangs.org.
+Special thanks to the Byte community for their contributions.
+Happy coding in Byte!
