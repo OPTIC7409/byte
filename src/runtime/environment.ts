@@ -110,7 +110,8 @@ export function createGlobalEnv() {
 
 	env.declareVar("time", MK_NATIVE_FN(timeFunction), true);
 	env.declareVar("len", MK_NATIVE_FN(lenFunction), true);
-
+	
+	// string manipulation functions
 	env.declareVar("concat", MK_NATIVE_FN(concatStringsFunction), true);
 	env.declareVar("substring", MK_NATIVE_FN(substringFunction), true);
 	env.declareVar("upper", MK_NATIVE_FN(uppercaseFunction), true);
@@ -121,7 +122,6 @@ export function createGlobalEnv() {
 	env.declareVar("endsWith", MK_NATIVE_FN(endsWithFunction), true);
 	// @ts-ignore
 	env.declareVar("split", MK_NATIVE_FN(splitStringFunction), true);
-	
 
 	return env;
 }
