@@ -45,7 +45,8 @@ async function repl() {
             const program = parser.produceAST(input);
 
             const result = evaluate(program, env);
-            console.log(result);
+            // @ts-ignore
+            console.log(result.value);
         } catch (error) {
             console.error(`Error processing input: ${error.message}`);
         }

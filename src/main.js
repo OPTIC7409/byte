@@ -82,7 +82,7 @@ function repl() {
                     }
                     program = parser.produceAST(input);
                     result = (0, interpreter_1.evaluate)(program, env);
-                    console.log(result);
+                    console.log(result.value);
                     return [3, 5];
                 case 4:
                     error_1 = _a.sent();

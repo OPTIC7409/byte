@@ -8,7 +8,15 @@ function createGlobalEnv() {
     env.declareVar("false", (0, values_1.MK_BOOL)(false), true);
     env.declareVar("null", (0, values_1.MK_NULL)(), true);
     env.declareVar("console", (0, values_1.MK_NATIVE_FN)(function (args, scope) {
-        console.log.apply(console, args);
+        for (var _i = 0, args_1 = args; _i < args_1.length; _i++) {
+            var arg = args_1[_i];
+            if (arg.type === "string") {
+                console.log(arg.value);
+            }
+            else {
+                console.log(arg.value);
+            }
+        }
         return (0, values_1.MK_NULL)();
     }), true);
     function lenFunction(_args, _env) {

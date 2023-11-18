@@ -19,11 +19,20 @@ export function createGlobalEnv() {
 	env.declareVar(
 		"console",
 		MK_NATIVE_FN((args, scope) => {
-			console.log(...args);
+			for (const arg of args) {
+				if (arg.type === "string") {
+					// @ts-ignore
+					console.log(arg.value);
+				} else {
+					// @ts-ignore
+					console.log(arg.value);
+				}
+			}
 			return MK_NULL();
 		}),
 		true
 	);
+	
 
 	
 
