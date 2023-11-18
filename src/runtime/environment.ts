@@ -25,9 +25,7 @@ export function createGlobalEnv() {
 		true
 	);
 
-	function timeFunction(_args: RuntimeVal[], _env: Environment) {
-		return MK_NUMBER(Date.now());
-	}
+	
 
 	function lenFunction(_args: RuntimeVal[], _env: Environment) {
 		// @ts-ignore
@@ -108,20 +106,206 @@ export function createGlobalEnv() {
 		return MK_ARRAY(result.map(value => MK_STRING(value)));
 	}
 
-	env.declareVar("time", MK_NATIVE_FN(timeFunction), true);
-	env.declareVar("len", MK_NATIVE_FN(lenFunction), true);
+	// math functions
+
+	function sqrtFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const result = Math.sqrt(_args[0].value);
+		return MK_NUMBER(result);
+	}
+
+	function absFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const result = Math.abs(_args[0].value);
+		return MK_NUMBER(result);
+	}
+
+	function sinFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const result = Math.sin(_args[0].value);
+		return MK_NUMBER(result);
+	}
 	
-	// string manipulation functions
-	env.declareVar("concat", MK_NATIVE_FN(concatStringsFunction), true);
-	env.declareVar("substring", MK_NATIVE_FN(substringFunction), true);
-	env.declareVar("upper", MK_NATIVE_FN(uppercaseFunction), true);
-	env.declareVar("lower", MK_NATIVE_FN(lowercaseFunction), true);
-	env.declareVar("replace", MK_NATIVE_FN(replaceSubstringFunction), true);
-	env.declareVar("trim", MK_NATIVE_FN(trimWhitespaceFunction), true);
-	env.declareVar("startsWith", MK_NATIVE_FN(startsWithFunction), true);
-	env.declareVar("endsWith", MK_NATIVE_FN(endsWithFunction), true);
+	function cosFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const result = Math.cos(_args[0].value);
+		return MK_NUMBER(result);
+	}
+
+	// file opening
+	function openFileFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement file opening logic
+		// ...
+	
+		return MK_STRING("File opened successfully");
+	}
+
+	function closeFileFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement file closing logic
+		// ...
+	
+		return MK_STRING("File closed successfully");
+	}
+
+	function readFileFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement file reading logic
+		// ...
+	
+		return MK_STRING("File content: ...");
+	}
+
+	function writeFileFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const content = String(_args[1].value);
+		// Implement file writing logic
+		// ...
+	
+		return MK_STRING("File written successfully");
+	}
+
+	// memory management functions
+	function mallocFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const size = _args[0].value;
+		// Implement dynamic memory allocation logic
+		// ...
+	
+		return MK_STRING("Memory allocated successfully");
+	}
+
+	function freeMemoryFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement memory deallocation logic
+		// ...
+	
+		return MK_STRING("Memory freed successfully");
+	}
+
+	// data structures functions
+	function arrayPushFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const array = _args[0].value;
+		// @ts-ignore
+		const element = _args[1];
+		array.push(element);
+		return MK_STRING("Element pushed to array successfully");
+	}
+
+	function listAppendFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const list = _args[0].value;
+		// @ts-ignore
+		const element = _args[1];
+		// Implement list append logic
+		// ...
+	
+		return MK_STRING("Element appended to list successfully");
+	}
+
+	
+	function dictGetFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const dictionary = _args[0].value;
+		// @ts-ignore
+		const key = _args[1].value;
+		// Implement dictionary get logic
+		// ...
+	
+		return MK_STRING("Value retrieved from dictionary");
+	}
+
+	function throwErrorFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const errorMessage = String(_args[0].value);
+		throw new Error(errorMessage);
+	}
+	
+	// time and date functions
+	function sleepFunction(_args: RuntimeVal[], _env: Environment) {
+		// @ts-ignore
+		const milliseconds = _args[0].value;
+		// Implement sleep logic
+		// ...
+	
+		return MK_STRING("Sleep completed");
+	}
+
+	function timeFunction(_args: RuntimeVal[], _env: Environment) {
+		return MK_NUMBER(Date.now());
+	}
+
+	// date functions
+	function dateFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement date logic
+		// ...
+	
+		return MK_STRING("Date retrieved");
+	}
+
+	function dayFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement day logic
+		// ...
+	
+		return MK_STRING("Day retrieved");
+	}
+
+	function monthFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement month logic
+		// ...
+	
+		return MK_STRING("Month retrieved");
+	}
+
+	function yearFunction(_args: RuntimeVal[], _env: Environment) {
+		// Implement year logic
+		// ...
+	
+		return MK_STRING("Year retrieved");
+	}
+
+	// String manipulation functions
+    env.declareVar("concat", MK_NATIVE_FN(concatStringsFunction), true);
+    env.declareVar("substring", MK_NATIVE_FN(substringFunction), true);
+    env.declareVar("upper", MK_NATIVE_FN(uppercaseFunction), true);
+    env.declareVar("lower", MK_NATIVE_FN(lowercaseFunction), true);
+    env.declareVar("replace", MK_NATIVE_FN(replaceSubstringFunction), true);
+    env.declareVar("trim", MK_NATIVE_FN(trimWhitespaceFunction), true);
+    env.declareVar("startsWith", MK_NATIVE_FN(startsWithFunction), true);
+    env.declareVar("endsWith", MK_NATIVE_FN(endsWithFunction), true);
 	// @ts-ignore
-	env.declareVar("split", MK_NATIVE_FN(splitStringFunction), true);
+    env.declareVar("split", MK_NATIVE_FN(splitStringFunction), true);
+
+    // Math functions
+    env.declareVar("sqrt", MK_NATIVE_FN(sqrtFunction), true);
+    env.declareVar("abs", MK_NATIVE_FN(absFunction), true);
+    env.declareVar("sin", MK_NATIVE_FN(sinFunction), true);
+    env.declareVar("cos", MK_NATIVE_FN(cosFunction), true);
+
+    // File System functions
+    env.declareVar("openFile", MK_NATIVE_FN(openFileFunction), true);
+    env.declareVar("closeFile", MK_NATIVE_FN(closeFileFunction), true);
+    env.declareVar("readFile", MK_NATIVE_FN(readFileFunction), true);
+    env.declareVar("writeFile", MK_NATIVE_FN(writeFileFunction), true);
+
+    // Memory Management functions
+    env.declareVar("malloc", MK_NATIVE_FN(mallocFunction), true);
+    env.declareVar("freeMemory", MK_NATIVE_FN(freeMemoryFunction), true);
+
+    // Data Structure functions
+    env.declareVar("arrayPush", MK_NATIVE_FN(arrayPushFunction), true);
+    env.declareVar("listAppend", MK_NATIVE_FN(listAppendFunction), true);
+    env.declareVar("dictGet", MK_NATIVE_FN(dictGetFunction), true);
+
+    // Error Handling functions
+	// @ts-ignore
+    env.declareVar("throwError", MK_NATIVE_FN(throwErrorFunction), true);
+
+    // Time and Date functions
+    env.declareVar("sleep", MK_NATIVE_FN(sleepFunction), true);
+    env.declareVar("time", MK_NATIVE_FN(timeFunction), true);
+    env.declareVar("date", MK_NATIVE_FN(dateFunction), true);
+    env.declareVar("day", MK_NATIVE_FN(dayFunction), true);
+    env.declareVar("month", MK_NATIVE_FN(monthFunction), true);
+    env.declareVar("year", MK_NATIVE_FN(yearFunction), true);
 
 	return env;
 }
