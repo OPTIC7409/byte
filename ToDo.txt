@@ -4,3 +4,5 @@ Pointer and memory handling - watch tutorial series to see how everything works
 Write Documentation
 Rewrite README.md
 Rewrite for better efficiency and optimisation.
+Implement line numbers to errors
+Fix weird ';' syntax bugs (; for all or none)
