@@ -8,7 +8,7 @@ Byte is a minimalist esoteric programming language designed to be concise and ch
 npm run byte test.byte
 ```
 
-#Native Functions
+# Native Functions
 ```javascript
 
 lenFunction: Returns the length of a string.
@@ -73,10 +73,10 @@ yearFunction: Placeholder for year retrieval logic.
 
 ```
 
-###Printing
+## Printing
 To print a value to the console with byte we use the ```console()``` function
 
-###Data types
+## Data types
 + Number
 + String
 + Array
