@@ -1,110 +1,87 @@
-$# Byte Programming Language
+# Byte Programming Language
 
-$**Introduction**
+**Introduction**
 
 Byte is a minimalist esoteric programming language designed to be concise and challenging. This guide will help you get started with Byte, including basic syntax, data types, control flow, and some special features.
 
-$**Running Byte Programs**
+```shell
+npm run byte test.byte
+```
 
-To run a Byte program, use the following command:
-```bash
-npm run byte <FILENAME>
-$Hello, World!
+#Native Functions
+```javascript
 
-Let's start with a simple "Hello, World!" program in Byte:
+lenFunction: Returns the length of a string.
 
-byte
-Copy code
-print("Hello, World!")
-$Variables
+lowercaseFunction: Converts a string to lowercase.
 
-Byte supports variables with the var keyword:
+uppercaseFunction: Converts a string to uppercase.
 
-byte
-Copy code
-var x = 42;
-print(x);
-$Data Types
+substringFunction: Returns a substring of a string based on start and end indices.
 
-Numbers: Byte supports numeric values.
+concatStringsFunction: Concatenates multiple strings into a single string.
 
-byte
-Copy code
-var num = 3.14;
-Strings: Represented with double quotes.
+replaceSubstringFunction: Replaces occurrences of a substring with another string.
 
-byte
-Copy code
-var message = "Hello, Byte!";
-Booleans: true or false.
+trimWhitespaceFunction: Removes leading and trailing whitespace from a string.
 
-byte
-Copy code
-var isTrue = true;
-$Control Flow
+startsWithFunction: Checks if a string starts with a specified prefix.
 
-$If Statement
+endsWithFunction: Checks if a string ends with a specified suffix.
 
-byte
-Copy code
-if (condition) {
-    // code to execute if condition is true
-} else {
-    // code to execute if condition is false
-}
-$While Loop
+splitStringFunction: Splits a string into an array of substrings based on a delimiter.
 
-byte
-Copy code
-var i = 0;
-while (i < 5) {
-    print(i);
-    i = i + 1;
-}
-$For Loop
+sqrtFunction: Calculates the square root of a number.
 
-byte
-Copy code
-for (var i = 0; i < 5; i = i + 1) {
-    print(i);
-}
-$Functions
+absFunction: Returns the absolute value of a number.
 
-Define functions using the function keyword:
+sinFunction: Calculates the sine of an angle (in radians).
 
-byte
-Copy code
-function add(a, b) {
-    return a + b;
-}
+cosFunction: Calculates the cosine of an angle (in radians).
 
-var result = add(3, 4);
-print(result);
-$Comments
+openFileFunction: Placeholder for file opening logic.
 
-Byte supports single-line comments with //:
+closeFileFunction: Placeholder for file closing logic.
 
-byte
-Copy code
-// This is a comment
-$Error Handling
+readFileFunction: Placeholder for file reading logic.
 
-Byte includes basic error handling with try and catch:
+writeFileFunction: Placeholder for file writing logic.
 
-byte
-Copy code
-try {
-    // code that might throw an error
-} catch (error) {
-    // handle the error
-    print("Error occurred:", error);
-}
-$Advanced Features
+mallocFunction: Placeholder for dynamic memory allocation logic.
 
-Bytecode Manipulation: Byte allows direct manipulation of its bytecode for advanced users.
-Metaprogramming: Modify the program's structure during runtime.
-$Credits
+freeMemoryFunction: Placeholder for memory deallocation logic.
 
-Byte is inspired by esolangs.org.
-Special thanks to the Byte community for their contributions.
-Happy coding in Byte!
+arrayPushFunction: Appends an element to an array.
+
+listAppendFunction: Placeholder for list append logic.
+
+dictGetFunction: Placeholder for dictionary get logic.
+
+throwErrorFunction: Throws an error with a specified error message.
+
+sleepFunction: Placeholder for sleep logic.
+
+timeFunction: Returns the current timestamp.
+
+dateFunction: Placeholder for date retrieval logic.
+
+dayFunction: Placeholder for day retrieval logic.
+
+monthFunction: Placeholder for month retrieval logic.
+
+yearFunction: Placeholder for year retrieval logic.
+
+```
+
+###Printing
+To print a value to the console with byte we use the ```console()``` function
+
+###Data types
++ Number
++ String
++ Array
++ Boolean
++ Null
++ Object
++ Functio
+ 
