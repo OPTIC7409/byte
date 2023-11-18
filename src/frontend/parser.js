@@ -307,6 +307,8 @@ var Parser = (function () {
                     kind: "StringLiteral",
                     value: this.eat().value
                 };
+            case lexer_1.TokenType.Array:
+                return this.parse_array_literal();
             case lexer_1.TokenType.OpenParen:
                 this.eat();
                 var value = this.parse_expr();
@@ -316,6 +318,21 @@ var Parser = (function () {
                 console.error("Unexpected token found during parsing!", this.at());
                 process.exit(1);
         }
+    };
+    Parser.prototype.parse_array_literal = function () {
+        this.eat();
+        var elements = [];
+        while (this.at().type != lexer_1.TokenType.CloseBracket) {
+            elements.push(this.parse_expr());
+            if (this.at().type != lexer_1.TokenType.CloseBracket) {
+                this.expect(lexer_1.TokenType.Comma, "Missing comma in array literal.");
+            }
+        }
+        this.expect(lexer_1.TokenType.CloseBracket, "Missing closing bracket in array literal.");
+        return {
+            kind: "ArrayLiteral",
+            elements: elements
+        };
     };
     return Parser;
 }());

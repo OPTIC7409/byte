@@ -1,4 +1,4 @@
-import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, Property, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, IfStatement, ForStatement, TryCatchStatement } from "./ast";
+import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, Property, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, ArrayLiteral, IfStatement, ForStatement, TryCatchStatement } from "./ast";
 import { tokenize, Token, TokenType } from "./lexer";
 
 export default class Parser {
@@ -404,6 +404,8 @@ export default class Parser {
                     kind: "StringLiteral",
                     value: this.eat().value
                 } as StringLiteral;
+            case TokenType.Array:
+                return this.parse_array_literal();
             case TokenType.OpenParen:
                 this.eat(); // eat the opening paren
                 const value = this.parse_expr();
@@ -414,5 +416,25 @@ export default class Parser {
                 console.error("Unexpected token found during parsing!", this.at());
                 process.exit(1);
         }
+    }
+
+    private parse_array_literal(): Expr {
+        this.eat(); // eat the opening bracket
+        const elements: Expr[] = [];
+
+        while (this.at().type != TokenType.CloseBracket) {
+            elements.push(this.parse_expr());
+
+            if (this.at().type != TokenType.CloseBracket) {
+                this.expect(TokenType.Comma, "Missing comma in array literal.");
+            }
+        }
+
+        this.expect(TokenType.CloseBracket, "Missing closing bracket in array literal.");
+
+        return {
+            kind: "ArrayLiteral",
+            elements
+        } as ArrayLiteral;
     }
 }

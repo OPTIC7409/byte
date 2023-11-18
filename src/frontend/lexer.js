@@ -6,34 +6,35 @@ var TokenType;
     TokenType[TokenType["Number"] = 0] = "Number";
     TokenType[TokenType["Identifier"] = 1] = "Identifier";
     TokenType[TokenType["String"] = 2] = "String";
-    TokenType[TokenType["Def"] = 3] = "Def";
-    TokenType[TokenType["Const"] = 4] = "Const";
-    TokenType[TokenType["Func"] = 5] = "Func";
-    TokenType[TokenType["If"] = 6] = "If";
-    TokenType[TokenType["Else"] = 7] = "Else";
-    TokenType[TokenType["For"] = 8] = "For";
-    TokenType[TokenType["BinaryOperator"] = 9] = "BinaryOperator";
-    TokenType[TokenType["Equals"] = 10] = "Equals";
-    TokenType[TokenType["Comma"] = 11] = "Comma";
-    TokenType[TokenType["Colon"] = 12] = "Colon";
-    TokenType[TokenType["Semicolon"] = 13] = "Semicolon";
-    TokenType[TokenType["Dot"] = 14] = "Dot";
-    TokenType[TokenType["OpenParen"] = 15] = "OpenParen";
-    TokenType[TokenType["CloseParen"] = 16] = "CloseParen";
-    TokenType[TokenType["OpenBrace"] = 17] = "OpenBrace";
-    TokenType[TokenType["CloseBrace"] = 18] = "CloseBrace";
-    TokenType[TokenType["OpenBracket"] = 19] = "OpenBracket";
-    TokenType[TokenType["CloseBracket"] = 20] = "CloseBracket";
-    TokenType[TokenType["Quotation"] = 21] = "Quotation";
-    TokenType[TokenType["Greater"] = 22] = "Greater";
-    TokenType[TokenType["Lesser"] = 23] = "Lesser";
-    TokenType[TokenType["EqualsCompare"] = 24] = "EqualsCompare";
-    TokenType[TokenType["NotEqualsCompare"] = 25] = "NotEqualsCompare";
-    TokenType[TokenType["Exclamation"] = 26] = "Exclamation";
-    TokenType[TokenType["And"] = 27] = "And";
-    TokenType[TokenType["Ampersand"] = 28] = "Ampersand";
-    TokenType[TokenType["Bar"] = 29] = "Bar";
-    TokenType[TokenType["EOF"] = 30] = "EOF";
+    TokenType[TokenType["Array"] = 3] = "Array";
+    TokenType[TokenType["Def"] = 4] = "Def";
+    TokenType[TokenType["Const"] = 5] = "Const";
+    TokenType[TokenType["Func"] = 6] = "Func";
+    TokenType[TokenType["If"] = 7] = "If";
+    TokenType[TokenType["Else"] = 8] = "Else";
+    TokenType[TokenType["For"] = 9] = "For";
+    TokenType[TokenType["BinaryOperator"] = 10] = "BinaryOperator";
+    TokenType[TokenType["Equals"] = 11] = "Equals";
+    TokenType[TokenType["Comma"] = 12] = "Comma";
+    TokenType[TokenType["Colon"] = 13] = "Colon";
+    TokenType[TokenType["Semicolon"] = 14] = "Semicolon";
+    TokenType[TokenType["Dot"] = 15] = "Dot";
+    TokenType[TokenType["OpenParen"] = 16] = "OpenParen";
+    TokenType[TokenType["CloseParen"] = 17] = "CloseParen";
+    TokenType[TokenType["OpenBrace"] = 18] = "OpenBrace";
+    TokenType[TokenType["CloseBrace"] = 19] = "CloseBrace";
+    TokenType[TokenType["OpenBracket"] = 20] = "OpenBracket";
+    TokenType[TokenType["CloseBracket"] = 21] = "CloseBracket";
+    TokenType[TokenType["Quotation"] = 22] = "Quotation";
+    TokenType[TokenType["Greater"] = 23] = "Greater";
+    TokenType[TokenType["Lesser"] = 24] = "Lesser";
+    TokenType[TokenType["EqualsCompare"] = 25] = "EqualsCompare";
+    TokenType[TokenType["NotEqualsCompare"] = 26] = "NotEqualsCompare";
+    TokenType[TokenType["Exclamation"] = 27] = "Exclamation";
+    TokenType[TokenType["And"] = 28] = "And";
+    TokenType[TokenType["Ampersand"] = 29] = "Ampersand";
+    TokenType[TokenType["Bar"] = 30] = "Bar";
+    TokenType[TokenType["EOF"] = 31] = "EOF";
 })(TokenType || (exports.TokenType = TokenType = {}));
 var KEYWORDS = {
     def: TokenType.Def,
@@ -42,6 +43,7 @@ var KEYWORDS = {
     if: TokenType.If,
     else: TokenType.Else,
     for: TokenType.For,
+    array: TokenType.Array,
 };
 function token(value, type) {
     if (value === void 0) { value = ""; }
@@ -161,6 +163,14 @@ function tokenize(sourceCode) {
                             }
                             src.shift();
                             tokens.push(token(str, TokenType.String));
+                            break;
+                        case "[":
+                            src.shift();
+                            tokens.push(token("[", TokenType.OpenBracket));
+                            break;
+                        case "]":
+                            src.shift();
+                            tokens.push(token("]", TokenType.CloseBracket));
                             break;
                         default:
                             if (isalpha(src[0], true)) {

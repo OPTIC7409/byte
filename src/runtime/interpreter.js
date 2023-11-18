@@ -35,6 +35,13 @@ function evaluate(astNode, env) {
             return (0, expressions_1.eval_if_statement)(astNode, env);
         case "TryCatchStatement":
             return (0, expressions_1.eval_try_catch_statement)(astNode, env);
+        case "ArrayLiteral":
+            return {
+                type: "array",
+                value: astNode.elements.map(function (el) {
+                    return evaluate(el, env);
+                }),
+            };
         default:
             console.error("This AST Node has not yet been setup for interpretation.\n", astNode);
             process.exit(0);

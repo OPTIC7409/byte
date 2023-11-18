@@ -3,6 +3,7 @@ export enum TokenType {
     Number,
     Identifier,
     String,
+    Array,
     // Keywords
     Def,
     Const,
@@ -43,6 +44,7 @@ const KEYWORDS: Record<string, TokenType> = {
     if: TokenType.If,
     else: TokenType.Else,
     for: TokenType.For,
+    array: TokenType.Array,
 };
 
 export interface Token {
@@ -196,6 +198,16 @@ export function tokenize(sourceCode: string): Token[] {
                 
                             // append new string token.
                             tokens.push(token(str, TokenType.String));
+                            break;
+                        
+                        // arrays
+                        case "[":
+                            src.shift();
+                            tokens.push(token("[", TokenType.OpenBracket));
+                            break;
+                        case "]":
+                            src.shift();
+                            tokens.push(token("]", TokenType.CloseBracket));
                             break;
                     default:
                         if (isalpha(src[0], true)) {

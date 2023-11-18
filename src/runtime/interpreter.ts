@@ -1,4 +1,4 @@
-import { NumberVal, RuntimeVal, StringVal } from "./values";
+import { NumberVal, RuntimeVal, StringVal, ArrayVal } from "./values";
 import {
 	AssignmentExpr,
 	BinaryExpr,
@@ -63,6 +63,15 @@ export function evaluate(astNode: Stmt, env: Environment): RuntimeVal {
 			return eval_if_statement(astNode as IfStatement, env);
 		case "TryCatchStatement":
 			return eval_try_catch_statement(astNode as TryCatchStatement, env);
+		case "ArrayLiteral":
+			// @ts-ignore
+			return {
+				type: "array",
+				// @ts-ignore
+				value: (astNode as ArrayLiteral).elements.map((el) =>
+					evaluate(el, env)
+				),
+			} as ArrayVal;
 		default:
 			console.error(
 				"This AST Node has not yet been setup for interpretation.\n",

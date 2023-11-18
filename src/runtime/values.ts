@@ -46,6 +46,15 @@ export function MK_NUMBER(n = 0) {
 	return { type: "number", value: n } as NumberVal;
 }
 
+export function MK_STRING(n = "") {
+	return { type: "string", value: n } as StringVal;
+}
+
+// @ts-ignore
+export function MK_ARRAY(n = []) {
+	return { type: "array", value: n } as ArrayVal;
+}
+
 /**
  * Runtime value that has access to the raw native javascript number.
  */
@@ -75,4 +84,10 @@ export interface FunctionValue extends RuntimeVal {
 	parameters: string[];
 	declarationEnv: Environment;
 	body: Stmt[];
+}
+
+// @ts-ignore
+export interface ArrayVal extends RuntimeVal {
+	type: "array";
+	value: RuntimeVal[];
 }
