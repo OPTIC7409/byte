@@ -1,8 +1,2 @@
 def sqrtResult = sqrt(25);
 console(sqrtResult)
-
-def sinResult = sin(2);
-console(sinResult)
-
-def cosResult = cos(4);
-console(cosResult)

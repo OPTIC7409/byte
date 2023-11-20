@@ -45,6 +45,8 @@ var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+var parser = new parser_1.default();
+var env = (0, environment_1.createGlobalEnv)();
 var file = process.argv[2];
 if (file) {
     run(file);
@@ -53,20 +55,33 @@ else {
     repl();
 }
 function run(filename) {
-    var parser = new parser_1.default();
-    var env = (0, environment_1.createGlobalEnv)();
-    var input = (0, fs_1.readFileSync)(filename, 'utf-8');
-    var program = parser.produceAST(input);
-    var result = (0, interpreter_1.evaluate)(program, env);
-}
-function repl() {
     return __awaiter(this, void 0, void 0, function () {
-        var parser, env, input, program, result, error_1;
+        var input, program, result, error_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    parser = new parser_1.default();
-                    env = (0, environment_1.createGlobalEnv)();
+                    _a.trys.push([0, 2, , 3]);
+                    return [4, fs_1.promises.readFile(filename, 'utf-8')];
+                case 1:
+                    input = _a.sent();
+                    program = parser.produceAST(input);
+                    result = (0, interpreter_1.evaluate)(program, env);
+                    return [3, 3];
+                case 2:
+                    error_1 = _a.sent();
+                    console.error("Error reading or processing file: ".concat(error_1.message));
+                    return [3, 3];
+                case 3: return [2];
+            }
+        });
+    });
+}
+function repl() {
+    return __awaiter(this, void 0, void 0, function () {
+        var input, program, result, error_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
                     console.log("Byte v1.0");
                     _a.label = 1;
                 case 1:
@@ -85,8 +100,8 @@ function repl() {
                     console.log(result.value);
                     return [3, 5];
                 case 4:
-                    error_1 = _a.sent();
-                    console.error("Error processing input: ".concat(error_1.message));
+                    error_2 = _a.sent();
+                    console.error("Error processing input: ".concat(error_2.message));
                     return [3, 5];
                 case 5: return [3, 1];
                 case 6: return [2];

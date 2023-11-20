@@ -3,12 +3,15 @@ import { createGlobalEnv } from "./runtime/environment";
 import { evaluate } from "./runtime/interpreter";
 
 import * as readline from 'readline/promises';
-import { readFileSync } from "fs";
+import { promises as fs } from "fs";
 
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
+const parser = new Parser();
+const env = createGlobalEnv();
 
 const file = process.argv[2];
 
@@ -18,20 +21,17 @@ if (file) {
     repl();
 }
 
-function run(filename: string) {
-    const parser = new Parser();
-    const env = createGlobalEnv();
-
-    let input = readFileSync(filename, 'utf-8');
-
-    const program = parser.produceAST(input);
-    const result = evaluate(program, env);
+async function run(filename: string) {
+    try {
+        const input = await fs.readFile(filename, 'utf-8');
+        const program = parser.produceAST(input);
+        const result = evaluate(program, env);
+    } catch (error) {
+        console.error(`Error reading or processing file: ${error.message}`);
+    }
 }
 
 async function repl() {
-    const parser = new Parser();
-    const env = createGlobalEnv();
-
     console.log("Byte v1.0");
 
     while (true) {
@@ -43,7 +43,6 @@ async function repl() {
             }
 
             const program = parser.produceAST(input);
-
             const result = evaluate(program, env);
             // @ts-ignore
             console.log(result.value);

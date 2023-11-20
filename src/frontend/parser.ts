@@ -1,43 +1,61 @@
-import { Stmt, Program, Expr, BinaryExpr, NumericLiteral, Identifier, VarDeclaration, AssignmentExpr, Property, ObjectLiteral, CallExpr, MemberExpr, FunctionDeclaration, StringLiteral, ArrayLiteral, IfStatement, ForStatement, TryCatchStatement } from "./ast";
+import {
+    Stmt,
+    Program,
+    Expr,
+    BinaryExpr,
+    NumericLiteral,
+    Identifier,
+    VarDeclaration,
+    AssignmentExpr,
+    Property,
+    ObjectLiteral,
+    CallExpr,
+    MemberExpr,
+    FunctionDeclaration,
+    StringLiteral,
+    ArrayLiteral,
+    IfStatement,
+    ForStatement,
+    TryCatchStatement,
+} from "./ast";
 import { tokenize, Token, TokenType } from "./lexer";
 
 export default class Parser {
     private tokens: Token[] = [];
 
     private not_eof(): boolean {
-        return this.tokens[0].type != TokenType.EOF;
+        return this.tokens[0].type !== TokenType.EOF;
     }
 
-    private at() {
-        return this.tokens[0] as Token;
+    private at(): Token {
+        return this.tokens[0];
     }
 
-    private eat() {
+    private eat(): Token {
+        return this.tokens.shift() as Token;
+    }
+
+    private expect(type: TokenType, err: any): Token {
         const prev = this.tokens.shift() as Token;
-
-        return prev;
-    }
-
-    private expect(type: TokenType, err: any) {
-        const prev = this.tokens.shift() as Token;
-        if (!prev || prev.type != type) {
+        if (!prev || prev.type !== type) {
             console.error(`Parser error:\n`, err, prev, "Expecting: ", type);
-            process.exit(1)
+            process.exit(1);
         }
 
         return prev;
     }
+
     public produceAST(sourceCode: string): Program {
         this.tokens = tokenize(sourceCode);
 
         const program: Program = {
             kind: "Program",
             body: [],
-        }
+        };
 
         // Parse until end of file
         while (this.not_eof()) {
-            program.body.push(this.parse_stmt())
+            program.body.push(this.parse_stmt());
         }
         return program;
     }
@@ -397,12 +415,12 @@ export default class Parser {
             case TokenType.Number:
                 return {
                     kind: "NumericLiteral",
-                    value: parseFloat(this.eat().value)
+                    value: parseFloat(this.eat().value),
                 } as NumericLiteral;
             case TokenType.String:
                 return {
                     kind: "StringLiteral",
-                    value: this.eat().value
+                    value: this.eat().value,
                 } as StringLiteral;
             case TokenType.Array:
                 return this.parse_array_literal();
@@ -422,10 +440,10 @@ export default class Parser {
         this.eat(); // eat the opening bracket
         const elements: Expr[] = [];
 
-        while (this.at().type != TokenType.CloseBracket) {
+        while (this.at().type !== TokenType.CloseBracket) {
             elements.push(this.parse_expr());
 
-            if (this.at().type != TokenType.CloseBracket) {
+            if (this.at().type !== TokenType.CloseBracket) {
                 this.expect(TokenType.Comma, "Missing comma in array literal.");
             }
         }
@@ -434,7 +452,7 @@ export default class Parser {
 
         return {
             kind: "ArrayLiteral",
-            elements
+            elements,
         } as ArrayLiteral;
     }
 }

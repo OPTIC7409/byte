@@ -6,18 +6,17 @@ var Parser = (function () {
         this.tokens = [];
     }
     Parser.prototype.not_eof = function () {
-        return this.tokens[0].type != lexer_1.TokenType.EOF;
+        return this.tokens[0].type !== lexer_1.TokenType.EOF;
     };
     Parser.prototype.at = function () {
         return this.tokens[0];
     };
     Parser.prototype.eat = function () {
-        var prev = this.tokens.shift();
-        return prev;
+        return this.tokens.shift();
     };
     Parser.prototype.expect = function (type, err) {
         var prev = this.tokens.shift();
-        if (!prev || prev.type != type) {
+        if (!prev || prev.type !== type) {
             console.error("Parser error:\n", err, prev, "Expecting: ", type);
             process.exit(1);
         }
@@ -300,12 +299,12 @@ var Parser = (function () {
             case lexer_1.TokenType.Number:
                 return {
                     kind: "NumericLiteral",
-                    value: parseFloat(this.eat().value)
+                    value: parseFloat(this.eat().value),
                 };
             case lexer_1.TokenType.String:
                 return {
                     kind: "StringLiteral",
-                    value: this.eat().value
+                    value: this.eat().value,
                 };
             case lexer_1.TokenType.Array:
                 return this.parse_array_literal();
@@ -322,16 +321,16 @@ var Parser = (function () {
     Parser.prototype.parse_array_literal = function () {
         this.eat();
         var elements = [];
-        while (this.at().type != lexer_1.TokenType.CloseBracket) {
+        while (this.at().type !== lexer_1.TokenType.CloseBracket) {
             elements.push(this.parse_expr());
-            if (this.at().type != lexer_1.TokenType.CloseBracket) {
+            if (this.at().type !== lexer_1.TokenType.CloseBracket) {
                 this.expect(lexer_1.TokenType.Comma, "Missing comma in array literal.");
             }
         }
         this.expect(lexer_1.TokenType.CloseBracket, "Missing closing bracket in array literal.");
         return {
             kind: "ArrayLiteral",
-            elements: elements
+            elements: elements,
         };
     };
     return Parser;
