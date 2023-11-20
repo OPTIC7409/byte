@@ -1,9 +1,6 @@
 def sqrtResult = sqrt(25);
 console(sqrtResult)
 
-def absResult = abs(10);
-console(absResult)
-
 def sinResult = sin(2);
 console(sinResult)
 
